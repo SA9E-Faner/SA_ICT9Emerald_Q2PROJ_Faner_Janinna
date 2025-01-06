@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strawberry Shortcake</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.jpg" type="image/x-icon">
+  <style>
+    body {
+      background-color: #F1DEDE;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      color: #5D576B;
+      font-family: cursive;
+      font-weight: bold;
+      font-size: 36px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .table {
+      background-color: #FE938C;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    .table th, .table td {
+      text-align: center;
+      color: #5D576B;
+    }
+
+    .table th {
+      background-color: #D496A7;
+    }
+
+    .table img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .one ul, .one ol {
+      text-align: left;
+      padding-left: 20px;
+      color: #6CD4FF;
+    }
+
+    .btn-custom {
+      background-color: #6CD4FF;
+      color: #5D576B;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 5px;
+      transition: 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #D496A7;
+      color: #F1DEDE;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .table img {
+        width: 80%;
+        margin: 10px auto;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Strawberry Shortcake</h1>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Dessert</th>
+        <th>Details</th>
+        <th>Procedures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="image cell">
+          <img src="strawberi.jpg" alt="Strawberry Shortcake" class="rounded-corner">
+        </td>
+        <td>
+          <p class="one">
+            <ul>
+              <li>2 cups self-rising flour, plus more for dusting</li>
+              <li>1/4 cup granulated sugar</li>
+              <li>3/4 cup cold unsalted butter (6 ounces), cubed, plus more for greasing</li>
+              <li>3 cups chilled heavy cream, divided</li>
+              <li>16 ounces fresh strawberries, hulled and quartered (about 3 cups)</li>
+            </ul>
+          </p>
+        </td>
+        <td>
+          <p class="one">
+            <ol>
+              <li>Preheat oven to 425°F. Grease and flour an 8-inch round cake pan. Stir together flour and sugar in a large bowl. Cut in the cubed butter until pea-size crumbs form. Using a fork, stir in 1 cup cream until a dough forms. Scrape dough into prepared pan, and lightly press it into an even layer.</li>
+              <li>Bake in preheated oven until golden and a toothpick inserted in center comes out clean, about 30 minutes. Transfer cake to a wire rack, and let cool in pan 10 minutes. Invert cake onto rack, and let cool completely.</li>
+              <li>Whisk remaining 2 cups cream in a medium bowl until stiff peaks form. Cut cake in half horizontally to create 2 layers. Scatter half of the strawberries over bottom half, and top with half of the whipped cream. Cover with top cake layer. Spread remaining half whipped cream over top of cake, and top with remaining strawberries. Serve immediately.</li>
+            </ol>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center mt-4">
+    <a href="recipes.html" class="btn btn-custom">Back to Recipes</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0nKgovXy56p8I6vVX72dMXw6csBO5oXK2e4R2bkz3Q1Jlp1T" crossorigin="anonymous"></script>
+</body>
+</html>

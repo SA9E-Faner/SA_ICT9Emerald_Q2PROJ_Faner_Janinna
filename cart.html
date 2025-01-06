@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <style>
+        /* Color Palette */
+        :root {
+            --primary-color: #cdb4db;
+            --secondary-color: #ffc8dd;
+            --tertiary-color: #ffafcc;
+            --highlight-color: #bde0fe;
+            --accent-color: #a2d2ff;
+            --dark-text-color: #291720;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: var(--tertiary-color);
+        }
+
+        .navbar-brand {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--accent-color); /* Updated to match your design */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--dark-text-color); /* Dark color for text */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--highlight-color); /* Light blue highlight on hover */
+        }
+
+        /* Cart Page Styling */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #fff; /* Adding a border to make it more visible */
+        }
+
+        .cart-item .name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--dark-text-color);
+        }
+
+        .cart-item .price {
+            font-size: 18px; /* Increased font size */
+            color: #5d576b; /* Darker color for better contrast */
+            font-weight: bold;
+        }
+
+        .cart-item .remove-btn {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-item .remove-btn:hover {
+            background-color: #ff4c4c;
+        }
+
+        .total-price {
+            font-size: 24px; /* Larger font size */
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+            color: #291720; /* Darker color for visibility */
+        }
+
+        .checkout-btn {
+            background-color: var(--highlight-color);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+    </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Unreal Haven</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recipes.html">Recipes</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <!-- Cart Link -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submitrecipes.html">Submit Your Recipe</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <div class="container my-5">
+        <h2>Your Cart</h2>
+
+        <!-- Cart Items List -->
+        <div id="cart-items">
+            <!-- Cart items will be dynamically injected here -->
+        </div>
+
+        <!-- Total Price -->
+        <div class="total-price">
+            Total: $<span id="total-price">0.00</span>
+        </div>
+
+        <!-- Checkout Button -->
+        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalPriceElem = document.getElementById('total-price');
+            const cartCountElem = document.getElementById('cart-count');
+
+            // Clear the current cart items
+            cartItemsContainer.innerHTML = '';
+
+            // Add each item to the cart display
+            let totalPrice = 0;
+            cart.forEach((item, index) => {
+                totalPrice += item.price;
+
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <p class="name">${item.name}</p>
+                        <p class="price">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItemDiv);
+            });
+
+            // Update total price and cart count
+            totalPriceElem.textContent = totalPrice.toFixed(2);
+            cartCountElem.textContent = cart.length;
+        }
+
+        // Function to remove item from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart)); // Save to localStorage
+            updateCartDisplay();
+        }
+
+        // Function to handle checkout (dummy function for now)
+        function checkout() {
+            alert('Proceeding to checkout...');
+            // Add actual checkout logic here
+        }
+
+        // Initial cart display update
+        updateCartDisplay();
+    </script>
+</body>
+</html>
